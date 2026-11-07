@@ -1,0 +1,360 @@
+{
+  "college_name": "Ramrao Adik Institute of Technology (RAIT)",
+  "short_name": "RAIT",
+  "location": "Nerul, Navi Mumbai, Maharashtra, India",
+  "source_policy": "Use this knowledge base for stable college information. Treat HODs, faculty, notices, exam dates, timetables and upcoming events as time-sensitive and verify them from the latest official RAIT source.",
+  "about_college": {
+    "established": 1983,
+    "affiliation": "University of Mumbai",
+    "recognition": [
+      "AICTE",
+      "DTE Maharashtra"
+    ],
+    "program_levels": [
+      "Undergraduate",
+      "Postgraduate",
+      "PhD"
+    ],
+    "engineering_domains": [
+      "Computer Engineering",
+      "Information Technology",
+      "Electronics Engineering",
+      "Electronics and Telecommunication Engineering",
+      "Instrumentation Engineering"
+    ],
+    "historical_note": "RAIT's official material records historical NBA accreditation and a NIRF 2019 engineering-category position of 172. These should not be presented as current without checking the latest official disclosure."
+  },
+  "departments": [
+    {
+      "name": "Computer Engineering",
+      "aliases": [
+        "Computer",
+        "CE"
+      ],
+      "description": "One of RAIT's established engineering departments; official RAIT material states that Computer Engineering has been present since the institute's inception.",
+      "areas": [
+        "Software engineering",
+        "Computer systems",
+        "Data and computing",
+        "Networks",
+        "Cybersecurity",
+        "AI and machine learning"
+      ],
+      "current_hod": "Verify from the latest official RAIT department/faculty page."
+    },
+    {
+      "name": "Information Technology",
+      "aliases": [
+        "IT"
+      ],
+      "description": "The IT department was started in 1999. Official RAIT material describes its focus as producing IT professionals and researchers and exposing students to current IT trends and problems.",
+      "areas": [
+        "Software development",
+        "Information systems",
+        "Data technologies",
+        "Emerging IT"
+      ],
+      "current_hod": "Verify from the latest official RAIT department/faculty page."
+    },
+    {
+      "name": "Electronics Engineering",
+      "aliases": [
+        "Electronics"
+      ],
+      "description": "RAIT offers Electronics Engineering as an engineering discipline.",
+      "areas": [
+        "Electronics",
+        "Embedded systems",
+        "Hardware",
+        "Control-related technologies"
+      ],
+      "current_hod": "Verify from the latest official RAIT department/faculty page."
+    },
+    {
+      "name": "Electronics and Telecommunication Engineering",
+      "aliases": [
+        "E&TC",
+        "ENTC",
+        "EXTC"
+      ],
+      "description": "RAIT offers Electronics and Telecommunication Engineering.",
+      "areas": [
+        "Communication systems",
+        "Telecommunication",
+        "Embedded systems",
+        "Electronics"
+      ],
+      "current_hod": "Verify from the latest official RAIT department/faculty page."
+    },
+    {
+      "name": "Instrumentation Engineering",
+      "aliases": [
+        "Instrumentation"
+      ],
+      "description": "RAIT offers Instrumentation Engineering.",
+      "areas": [
+        "Measurement",
+        "Control systems",
+        "Automation",
+        "Industrial instrumentation"
+      ],
+      "current_hod": "Verify from the latest official RAIT department/faculty page."
+    }
+  ],
+  "faculty_and_hods": {
+    "current_status": "Do not invent current HOD or faculty information. Faculty appointments and designations can change.",
+    "official_profile_example": {
+      "name": "Puja Y Padiya",
+      "department": "Computer",
+      "designation": "Associate Professor",
+      "specialization": "Networking and Security",
+      "verification_note": "This profile appears in RAIT's official faculty system; verify current status before treating it as current."
+    },
+    "current_hods": {
+      "Computer Engineering": "Verify latest official source.",
+      "Information Technology": "Verify latest official source.",
+      "Electronics Engineering": "Verify latest official source.",
+      "Electronics and Telecommunication Engineering": "Verify latest official source.",
+      "Instrumentation Engineering": "Verify latest official source."
+    }
+  },
+  "classrooms": {
+    "historical_official_figures": {
+      "classrooms": 38,
+      "tutorial_rooms": 20,
+      "projectors": "Historical RAIT disclosure states projectors in each classroom."
+    },
+    "current_note": "These figures come from an older official minimum-disclosure document and should not be assumed current."
+  },
+  "laboratories": {
+    "historical_count": 64,
+    "current_note": "The 64-laboratory figure is from a historical official disclosure."
+  },
+  "library": {
+    "description": "RAIT provides library and academic-resource facilities for students and faculty.",
+    "historical_official_figures": {
+      "reading_room_seating_capacity": 500,
+      "books": 44045,
+      "electronic_resources": [
+        "IEEE",
+        "Springer",
+        "ScienceDirect",
+        "ACM",
+        "Springer e-books",
+        "Knimbus",
+        "Videeya",
+        "e-journals"
+      ],
+      "multimedia_literature": "Historical disclosure lists 13 laptops and 20 headphones."
+    },
+    "services": [
+      "Reading/reference facilities",
+      "Books",
+      "Electronic journals",
+      "Academic databases"
+    ],
+    "current_timings": "Verify latest official library notice.",
+    "current_location": "Verify latest official campus information."
+  },
+  "exams": {
+    "description": "Students should use official RAIT and University of Mumbai examination communications for forms, timetables, hall tickets, results and deadlines.",
+    "topics": [
+      "Exam forms",
+      "Exam timetables",
+      "Hall tickets",
+      "Internal assessment",
+      "University examinations",
+      "Results",
+      "Revaluation"
+    ],
+    "current_dates": "Verify latest official examination notice.",
+    "current_deadlines": "Verify latest official examination notice."
+  },
+  "academic_information": {
+    "timetable": "Verify the current department timetable.",
+    "academic_calendar": "Use the latest official academic calendar.",
+    "attendance": "Verify currently applicable attendance rules with the college/department.",
+    "notices": "Use official RAIT and department communications for current notices."
+  },
+  "facilities": {
+    "historical_infrastructure": {
+      "land_area_acres": 20,
+      "built_up_area_sq_m": 18500,
+      "sports_ground": "Available",
+      "seminar_rooms": 5,
+      "conference_rooms": 1,
+      "committee_rooms": 1,
+      "computer_centre_pcs": 100,
+      "higher_spec_pcs": 675,
+      "lan_terminals": 675,
+      "wifi": "Available in historical disclosure"
+    },
+    "student_support": [
+      "Scholarship support",
+      "Medical assistance information",
+      "Career and placement support",
+      "Technical and cultural activities",
+      "Accessibility support documented historically"
+    ],
+    "current_note": "Infrastructure counts are historical; verify current facilities."
+  },
+  "clubs": {
+    "documented_student_organizations": [
+      "Student Union Committee (SUC)",
+      "Computer Society of India (CSI)",
+      "IEEE",
+      "ITSA",
+      "ISTE",
+      "Social Wing",
+      "RAIT Sports",
+      "Photo Circle",
+      "Quiz Master",
+      "Radio Club",
+      "Yoga Club",
+      "Department-level technical committees"
+    ],
+    "current_note": "Club names, office-bearers and active committees can change. Verify current membership/activity information."
+  },
+  "events": {
+    "documented_events": [
+      {
+        "name": "Horizon",
+        "type": "Cultural fest",
+        "description": "RAIT describes Horizon as a three-day cultural fest managed with student committees."
+      },
+      {
+        "name": "Technical Fests",
+        "type": "Technical",
+        "description": "Technical festivals are documented on the official RAIT site."
+      },
+      {
+        "name": "Stamina",
+        "type": "Sports",
+        "description": "Sports activity documented by RAIT."
+      },
+      {
+        "name": "Olympia",
+        "type": "Sports",
+        "description": "Sports activity documented by RAIT."
+      },
+      {
+        "name": "Udaan",
+        "type": "Social initiative",
+        "description": "RAIT describes Udaan as a Social Wing marathon associated with fundraising for underprivileged children."
+      },
+      {
+        "name": "Youth Festival",
+        "type": "Cultural",
+        "description": "RAIT documents participation in the University of Mumbai Youth Festival through KALARAAG."
+      }
+    ],
+    "upcoming_events": "Verify current event dates from official RAIT announcements."
+  },
+  "notices": {
+    "official_area": "RAIT has a News and Notices area.",
+    "historical_examples": [
+      "Exam-form notices",
+      "Exam notices",
+      "Scholarship notices",
+      "Academic calendars",
+      "Registration/reopening notices",
+      "Workshop notices"
+    ],
+    "current_notice_policy": "Do not answer current deadlines or notices from this static file. Verify the latest official RAIT notice."
+  },
+  "student_services": {
+    "documented_services": [
+      "Bonafide certificate",
+      "Railway concession forms",
+      "Online fee payment",
+      "University results",
+      "Scholarship-related support",
+      "Medical assistance information",
+      "Academic/examination communication"
+    ],
+    "current_procedure": "Verify current office procedure and timings."
+  },
+  "placements": {
+    "description": "RAIT has a Training and Placement function and an official placement portal/brochure.",
+    "topics": [
+      "Placements",
+      "Internships",
+      "Recruitment",
+      "Training",
+      "Career guidance"
+    ],
+    "current_statistics": "Verify the latest official placement report/brochure before quoting current statistics."
+  },
+  "online_resources": {
+    "official_website": "https://www.rait.ac.in/",
+    "resources": [
+      "Mumbai University",
+      "AICTE",
+      "DTE Maharashtra",
+      "Training and Placement Portal",
+      "RAIT Alumni Website",
+      "RAIT PAY",
+      "Transcript application",
+      "LMS Portal",
+      "Webmail",
+      "Disclosures"
+    ],
+    "address": "Nerul, Navi Mumbai – 400706, Maharashtra, India"
+  },
+  "faqs": [
+    {
+      "question": "Where is RAIT located?",
+      "answer": "RAIT is located in Nerul, Navi Mumbai, Maharashtra."
+    },
+    {
+      "question": "When was RAIT established?",
+      "answer": "RAIT was established in 1983."
+    },
+    {
+      "question": "Which university is RAIT affiliated with?",
+      "answer": "Official RAIT material identifies the institute as affiliated with the University of Mumbai."
+    },
+    {
+      "question": "What departments are available?",
+      "answer": "The knowledge base covers Computer Engineering, Information Technology, Electronics Engineering, Electronics and Telecommunication Engineering, and Instrumentation Engineering."
+    },
+    {
+      "question": "What is Horizon?",
+      "answer": "Horizon is described by RAIT as a cultural fest managed with student committees."
+    },
+    {
+      "question": "Does RAIT have technical activities?",
+      "answer": "Yes. Official RAIT material documents technical festivals and technical student organizations/committees."
+    },
+    {
+      "question": "How do I find current exam dates?",
+      "answer": "Check the latest official RAIT examination notice because dates and deadlines change."
+    },
+    {
+      "question": "How do I find the current HOD?",
+      "answer": "Check the latest official RAIT department/faculty page because HOD appointments can change."
+    },
+    {
+      "question": "How do I find current notices?",
+      "answer": "Check the official RAIT News and Notices area or the relevant department's current communication."
+    }
+  ],
+  "sources": [
+    {
+      "title": "RAIT official homepage",
+      "url": "https://www.rait.ac.in/rait/index.php"
+    },
+    {
+      "title": "RAIT Minimum Disclosure",
+      "url": "https://rait.ac.in/rait/storage/footer_links/DisclosuresMinimum_Disclosures_2018.pdf"
+    },
+    {
+      "title": "RAIT Faculty Details",
+      "url": "https://www.rait.ac.in/rait/facultydetails/display_details.php?page_id=396"
+    },
+    {
+      "title": "RAIT Placement Brochure",
+      "url": "https://rait.ac.in/rait/storage/tpc/Brochure.pdf"
+    }
+  ]
+}

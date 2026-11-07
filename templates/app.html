@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CampusMate — AI College Assistant</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app-bg"></div>
+<div class="app-layout">
+  <aside class="sidebar glass" id="sidebar">
+    <div class="side-brand">
+      <div class="brand-mark">✦</div>
+      <div><strong>CampusMate</strong><small>AI College Assistant</small></div>
+    </div>
+
+    <button class="new-chat" id="newChat">＋ New conversation</button>
+
+    <nav>
+      <button class="nav-item active" data-view="chat">◈ <span>AI Chat</span></button>
+      <button class="nav-item" data-view="assignment">▣ <span>Assignment Coach</span></button>
+      <button class="nav-item" data-view="history">◷ <span>Chat History</span></button>
+    </nav>
+
+    <div class="side-section">
+      <div class="side-label">Recent</div>
+      <div id="recentChats"></div>
+    </div>
+
+    <div class="side-bottom">
+      <button class="theme-toggle" id="themeToggle">◐ <span>Dark mode</span></button>
+      <button class="profile-mini" id="profileBtn">
+        <span class="avatar" id="avatar">P</span>
+        <span><strong id="userName">Student</strong><small id="userEmail">Local account</small></span>
+        <span>⋯</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main glass">
+    <header class="topbar">
+      <button class="mobile-menu" id="menuBtn">☰</button>
+      <div>
+        <div class="eyebrow" id="modeEyebrow">CAMPUSMATE</div>
+        <h2 id="pageTitle">How can I help?</h2>
+      </div>
+      <div class="top-actions">
+        <span class="online-dot"></span><span>Local AI</span>
+      </div>
+    </header>
+
+    <section id="chatView" class="view active">
+      <div class="hero" id="hero">
+        <div class="hero-icon">🎓</div>
+        <h1>What are we working on?</h1>
+        <p>Ask about RAIT, your subjects, campus life, or use Assignment Coach for structured academic help.</p>
+      </div>
+
+      <div class="suggestions" id="suggestions">
+        <button data-q="What departments are available at RAIT?"><b>🏫</b><span>College & departments<small>Explore RAIT</small></span></button>
+        <button data-q="Tell me about the library and its resources."><b>📚</b><span>Library<small>Resources & services</small></span></button>
+        <button data-q="What clubs and student activities are available?"><b>🎯</b><span>Clubs & activities<small>Find your community</small></span></button>
+        <button data-q="What facilities are available on campus?"><b>✨</b><span>Campus facilities<small>Labs, sports & more</small></span></button>
+      </div>
+
+      <div id="messages" class="messages"></div>
+    </section>
+
+    <section id="assignmentView" class="view">
+      <div class="assignment-hero">
+        <div class="hero-icon">🧠</div>
+        <div><div class="eyebrow">ASSIGNMENT COACH</div><h1>Let's work through it.</h1><p>Choose a subject and describe the assignment. CampusMate will explain the concept, break down the task and help you build your answer.</p></div>
+      </div>
+      <div class="subject-grid">
+        <button data-subject="Artificial Intelligence">🤖<span>Artificial Intelligence</span></button>
+        <button data-subject="Data Analytics">📊<span>Data Analytics</span></button>
+        <button data-subject="Database Management Systems">🗄️<span>DBMS</span></button>
+        <button data-subject="Distributed Computing">🌐<span>Distributed Computing</span></button>
+        <button data-subject="Computer Architecture">💻<span>Computer Architecture</span></button>
+        <button data-subject="Human Computer Interaction">🎨<span>HCI</span></button>
+        <button data-subject="Operating Systems">⚙️<span>Operating Systems</span></button>
+        <button data-subject="Other">＋<span>Other subject</span></button>
+      </div>
+      <div class="assignment-panel">
+        <label>Selected subject</label>
+        <select id="subjectSelect">
+          <option value="">Choose a subject</option>
+          <option>Artificial Intelligence</option><option>Data Analytics</option><option>Database Management Systems</option>
+          <option>Distributed Computing</option><option>Computer Architecture</option><option>Human Computer Interaction</option>
+          <option>Operating Systems</option><option>Other</option>
+        </select>
+        <textarea id="assignmentInput" placeholder="Paste your assignment question here..."></textarea>
+        <button class="primary-btn" id="assignmentSend">Help me with this assignment →</button>
+      </div>
+    </section>
+
+    <section id="historyView" class="view">
+      <div class="history-head"><div><div class="eyebrow">YOUR CONVERSATIONS</div><h1>Chat history</h1><p>Pick up where you left off.</p></div><button class="new-chat small" id="historyNew">＋ New chat</button></div>
+      <div class="history-grid" id="historyGrid"></div>
+    </section>
+
+    <div class="composer" id="composer">
+      <div class="composer-mode" id="composerMode">AI Chat</div>
+      <textarea id="input" rows="1" placeholder="Ask CampusMate anything..."></textarea>
+      <button id="send" class="send-btn">↑</button>
+    </div>
+  </main>
+</div>
+
+<div class="profile-menu glass" id="profileMenu">
+  <div class="profile-big"><span class="avatar large" id="profileAvatar">P</span><div><strong id="profileName">Student</strong><small id="profileEmail">email</small></div></div>
+  <button id="logout">Log out</button>
+</div>
+
+<script>
+let currentChat = null;
+let mode = "chat";
+let subject = "";
+const messagesEl = document.getElementById("messages");
+const input = document.getElementById("input");
+const composer = document.getElementById("composer");
+
+async function api(url, options={}) {
+  const r = await fetch(url, options);
+  const data = await r.json();
+  if (r.status === 401) { location.href="/login"; throw new Error("Not logged in"); }
+  if (!r.ok) throw new Error(data.error || "Request failed");
+  return data;
+}
+
+function setView(name) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.getElementById(name + "View").classList.add("active");
+  document.querySelectorAll(".nav-item").forEach(n => n.classList.toggle("active", n.dataset.view === name));
+  composer.style.display = name === "history" ? "none" : "flex";
+  if (name === "chat") { mode="chat"; document.getElementById("pageTitle").textContent="How can I help?"; document.getElementById("composerMode").textContent="AI Chat"; }
+  if (name === "assignment") { mode="assignment"; document.getElementById("pageTitle").textContent="Assignment Coach"; document.getElementById("composerMode").textContent="Assignment Coach"; }
+  if (name === "history") { loadHistory(); document.getElementById("pageTitle").textContent="Chat history"; }
+  document.getElementById("sidebar").classList.remove("open");
+}
+
+function addMessage(role, text) {
+  const row = document.createElement("div");
+  row.className = "message-row " + role;
+  row.innerHTML = `<div class="message-avatar">${role==="user" ? "You" : "✦"}</div><div class="message-bubble"></div>`;
+  row.querySelector(".message-bubble").textContent = text;
+  messagesEl.appendChild(row);
+  messagesEl.scrollIntoView({block:"end"});
+}
+
+function addTyping() {
+  const row = document.createElement("div");
+  row.id="typing"; row.className="message-row assistant";
+  row.innerHTML='<div class="message-avatar">✦</div><div class="message-bubble typing"><i></i><i></i><i></i></div>';
+  messagesEl.appendChild(row);
+}
+
+async function sendMessage(text, forcedMode=null, forcedSubject=null) {
+  text = text.trim();
+  if (!text) return;
+  mode = forcedMode || mode;
+  subject = forcedSubject || subject;
+  if (!currentChat) {
+    const c = await api("/api/chats", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:text.slice(0,55)})});
+    currentChat = c.id;
+  }
+  document.getElementById("hero").style.display="none";
+  document.getElementById("suggestions").style.display="none";
+  addMessage("user", text);
+  input.value=""; input.style.height="auto";
+  addTyping();
+  document.getElementById("send").disabled=true;
+  try {
+    const data = await api("/api/chat", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:currentChat,message:text,mode,subject})});
+    document.getElementById("typing")?.remove();
+    addMessage("assistant", data.answer);
+    loadRecent();
+  } catch(e) {
+    document.getElementById("typing")?.remove();
+    addMessage("assistant", "I couldn't process that. " + e.message);
+  } finally { document.getElementById("send").disabled=false; input.focus(); }
+}
+
+document.querySelectorAll(".nav-item").forEach(b => b.onclick=()=>setView(b.dataset.view));
+document.querySelectorAll(".suggestions button").forEach(b => b.onclick=()=>sendMessage(b.dataset.q));
+
+document.querySelectorAll(".subject-grid button").forEach(b => b.onclick=()=>{
+  subject=b.dataset.subject; document.getElementById("subjectSelect").value=subject;
+  document.getElementById("assignmentInput").focus();
+});
+
+document.getElementById("assignmentSend").onclick=()=>{
+  const s=document.getElementById("subjectSelect").value;
+  const q=document.getElementById("assignmentInput").value;
+  if(!s || !q.trim()) return alert("Choose a subject and enter your assignment question.");
+  setView("chat"); subject=s; mode="assignment";
+  sendMessage("Subject: "+s+"\\n\\nAssignment: "+q, "assignment", s);
+};
+
+document.getElementById("send").onclick=()=>sendMessage(input.value);
+input.addEventListener("keydown", e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessage(input.value)}});
+input.addEventListener("input",()=>{input.style.height="auto";input.style.height=Math.min(input.scrollHeight,130)+"px"});
+
+document.getElementById("newChat").onclick=async()=>{
+  currentChat=null; messagesEl.innerHTML="";
+  document.getElementById("hero").style.display="block"; document.getElementById("suggestions").style.display="grid";
+  setView("chat");
+};
+
+document.getElementById("historyNew").onclick=()=>document.getElementById("newChat").click();
+
+async function loadRecent() {
+  const data=await api("/api/chats");
+  const el=document.getElementById("recentChats"); el.innerHTML="";
+  data.chats.slice(0,7).forEach(c=>{
+    const b=document.createElement("button"); b.className="recent-chat"; b.textContent=c.title;
+    b.onclick=()=>openChat(c.id); el.appendChild(b);
+  });
+}
+
+async function loadHistory() {
+  const data=await api("/api/chats"); const grid=document.getElementById("historyGrid"); grid.innerHTML="";
+  if(!data.chats.length){grid.innerHTML='<div class="empty-history">No conversations yet. Start your first chat.</div>';return;}
+  data.chats.forEach(c=>{
+    const card=document.createElement("div"); card.className="history-card";
+    card.innerHTML=`<div class="history-icon">◈</div><div><strong>${escapeHtml(c.title)}</strong><small>Updated ${new Date(c.updated_at).toLocaleString()}</small></div><button class="delete-chat" title="Delete">×</button>`;
+    card.querySelector(".delete-chat").onclick=async e=>{e.stopPropagation(); await api("/api/chats/"+c.id,{method:"DELETE"}); loadHistory(); loadRecent();};
+    card.onclick=()=>openChat(c.id); grid.appendChild(card);
+  });
+}
+
+async function openChat(id) {
+  const data=await api("/api/chats/"+id); currentChat=id; messagesEl.innerHTML="";
+  document.getElementById("hero").style.display="none"; document.getElementById("suggestions").style.display="none";
+  data.messages.forEach(m=>addMessage(m.role,m.content)); setView("chat");
+}
+
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+
+document.getElementById("themeToggle").onclick=()=>{
+  const dark=document.body.classList.toggle("dark");
+  localStorage.setItem("campusmate-theme",dark?"dark":"light");
+  document.getElementById("themeToggle").querySelector("span").textContent=dark?"Light mode":"Dark mode";
+};
+if(localStorage.getItem("campusmate-theme")==="dark"){document.body.classList.add("dark");document.querySelector("#themeToggle span").textContent="Light mode";}
+
+document.getElementById("menuBtn").onclick=()=>document.getElementById("sidebar").classList.toggle("open");
+document.getElementById("profileBtn").onclick=()=>document.getElementById("profileMenu").classList.toggle("show");
+document.getElementById("logout").onclick=async()=>{await api("/api/logout",{method:"POST"});location.href="/login"};
+
+(async()=>{
+  const me=await api("/api/me");
+  document.getElementById("userName").textContent=me.name;
+  document.getElementById("userEmail").textContent=me.email;
+  document.getElementById("profileName").textContent=me.name;
+  document.getElementById("profileEmail").textContent=me.email;
+  document.getElementById("avatar").textContent=me.name[0].toUpperCase();
+  document.getElementById("profileAvatar").textContent=me.name[0].toUpperCase();
+  loadRecent();
+})();
+</script>
+</body>
+</html>
